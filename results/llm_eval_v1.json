@@ -1,0 +1,103 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "events": 150,
+  "per_scenario": 15,
+  "usage": {
+    "calls": 450,
+    "input_tokens": 529689,
+    "output_tokens": 75391,
+    "errors": 0
+  },
+  "scene": {
+    "vlm_zero_shot": {
+      "weather": 0.9733333333333334,
+      "light": 0.8733333333333333,
+      "lane_markings": 0.82,
+      "objects_precision": 0.75,
+      "objects_recall": 0.7142857142857143
+    },
+    "classical_supervised_3000_labels": {
+      "weather": 0.9733333333333334,
+      "light": 0.9333333333333333,
+      "lane_markings": 0.86,
+      "objects_precision": 0.9907407407407407,
+      "objects_recall": 0.6369047619047619
+    }
+  },
+  "triage": {
+    "llm_card_only": {
+      "severity_acc": 0.48,
+      "severity_within_1": 0.9066666666666666,
+      "severe_recall": 0.4225352112676056,
+      "severe_precision": 0.9375,
+      "root_cause_acc": 0.5133333333333333,
+      "scenario_acc": 0.26,
+      "scenario_macro_f1": 0.19415499157498173
+    },
+    "llm_card_plus_vlm_scene": {
+      "severity_acc": 0.52,
+      "severity_within_1": 0.9333333333333333,
+      "severe_recall": 0.5352112676056338,
+      "severe_precision": 0.95,
+      "root_cause_acc": 0.6933333333333334,
+      "scenario_acc": 0.6733333333333333,
+      "scenario_macro_f1": 0.6799997982902817
+    },
+    "rules": {
+      "severity_acc": 0.64,
+      "severity_within_1": 0.9733333333333334,
+      "severe_recall": 0.6056338028169014,
+      "severe_precision": 0.9555555555555556,
+      "root_cause_acc": 0.9933333333333333,
+      "scenario_acc": 0.7933333333333333,
+      "scenario_macro_f1": 0.7270772238514175
+    },
+    "lightgbm_supervised_3480_labels": {
+      "severity_acc": 0.64,
+      "severity_within_1": 0.9933333333333333,
+      "severe_recall": 0.7887323943661971,
+      "severe_precision": 0.9032258064516129,
+      "root_cause_acc": 1.0,
+      "scenario_acc": 1.0,
+      "scenario_macro_f1": 1.0
+    }
+  },
+  "example_narratives": [
+    {
+      "event_id": "E021256",
+      "true_scenario": "comfort_override",
+      "true_severity": 1,
+      "narrative": "Driver took over control on a straight urban road during low-sun conditions (sunset/sunrise). No lead vehicle was detected, minimal deceleration occurred (0.4 m/s\u00b2), and lane detection confidence remained high (0.82), indicating the system was functioning normally but the driver chose to assume control, likely due to discomfort with low-sun glare."
+    },
+    {
+      "event_id": "E015405",
+      "true_scenario": "construction_zone",
+      "true_severity": 3,
+      "narrative": "Driver took over on a straight urban road during daylight with clear conditions, as the vehicle encountered orange traffic cones indicating construction work. Lane-detection confidence dropped to 0.49 (a 0.33 point dip), likely due to the presence of construction cones and lane geometry disruption, causing the system to lose confidence in its lane tracking despite clear camera visibility and no actual lead vehicle present."
+    },
+    {
+      "event_id": "E017468",
+      "true_scenario": "faded_lanes",
+      "true_severity": 1,
+      "narrative": "The driver deactivated adaptive cruise control on a snow-covered rural road where lane markings were completely obscured by heavy snowfall. Lane-detection confidence dropped to 0.38 with minimal camera visibility (0.62), causing the system to lose reliable lane tracking and prompting manual intervention."
+    },
+    {
+      "event_id": "E015822",
+      "true_scenario": "phantom_brake",
+      "true_severity": 3,
+      "narrative": "Vehicle executed a hard braking maneuver (5.1 m/s\u00b2 deceleration, 27 mph speed drop) on a straight highway under rainy conditions with an overpass ahead. No lead vehicle was detected and no time-to-collision threshold was triggered, indicating a false object detection or shadow interpretation from the bridge structure in degraded visibility (camera visibility 0.63)."
+    },
+    {
+      "event_id": "E014899",
+      "true_scenario": "sensor_blockage_snow",
+      "true_severity": 2,
+      "narrative": "Vehicle deactivated ADAS in heavy nighttime snowfall with severely degraded camera visibility (0.12 min, below threshold for 10 seconds) and lane-detection confidence collapsed to 0.33. The combination of snow accumulation on optics and low ambient light created hostile sensing conditions that system correctly identified as unreliable for autonomous operation."
+    },
+    {
+      "event_id": "E021538",
+      "true_scenario": "sun_glare",
+      "true_severity": 2,
+      "narrative": "Vehicle deactivated ADAS on highway during low-sun conditions (golden hour) while a lead vehicle was present ahead. Camera visibility dropped to 0.44 (below 0.45 threshold for 0.2 s), indicating sun glare degraded image quality; the system did not detect the lead vehicle despite clear lane markings and no emergency braking or steering input occurring."
+    }
+  ]
+}

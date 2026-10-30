@@ -1,0 +1,17 @@
+numpy
+pandas
+pyarrow
+scikit-learn>=1.3
+lightgbm
+statsmodels
+scipy
+pyspark>=3.5
+deltalake
+faiss-cpu
+pillow
+fastapi
+httpx
+uvicorn
+matplotlib
+anthropic
+pytest

@@ -1,0 +1,114 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "prompt": "v2",
+  "events": 150,
+  "per_scenario": 15,
+  "usage": {
+    "calls": 450,
+    "input_tokens": 883227,
+    "output_tokens": 74432,
+    "errors": 0
+  },
+  "scenes_reused": 0,
+  "scene": {
+    "vlm_zero_shot": {
+      "weather": 0.9666666666666667,
+      "light": 0.88,
+      "lane_markings": 0.7933333333333333,
+      "objects_precision": 0.7134146341463414,
+      "objects_recall": 0.6964285714285714
+    },
+    "classical_supervised_3000_labels": {
+      "weather": 0.9733333333333334,
+      "light": 0.9333333333333333,
+      "lane_markings": 0.86,
+      "objects_precision": 0.9907407407407407,
+      "objects_recall": 0.6369047619047619
+    }
+  },
+  "triage": {
+    "llm_card_only": {
+      "severity_acc": 0.64,
+      "severity_within_1": 0.9733333333333334,
+      "severe_recall": 0.6901408450704225,
+      "severe_precision": 0.9423076923076923,
+      "root_cause_acc": 0.9933333333333333,
+      "scenario_acc": 0.8733333333333333,
+      "scenario_macro_f1": 0.8586893995324228
+    },
+    "llm_card_plus_vlm_scene": {
+      "severity_acc": 0.6,
+      "severity_within_1": 0.9733333333333334,
+      "severe_recall": 0.6619718309859155,
+      "severe_precision": 0.8867924528301887,
+      "root_cause_acc": 0.9733333333333334,
+      "scenario_acc": 0.9066666666666666,
+      "scenario_macro_f1": 0.9041242933727942
+    },
+    "rules": {
+      "severity_acc": 0.64,
+      "severity_within_1": 0.9733333333333334,
+      "severe_recall": 0.6056338028169014,
+      "severe_precision": 0.9555555555555556,
+      "root_cause_acc": 0.9933333333333333,
+      "scenario_acc": 0.7933333333333333,
+      "scenario_macro_f1": 0.7270772238514175
+    },
+    "knn_vote_5_labelled_neighbours": {
+      "severity_acc": 0.6533333333333333,
+      "severity_within_1": 0.9866666666666667,
+      "severe_recall": 0.7887323943661971,
+      "severe_precision": 0.8888888888888888,
+      "root_cause_acc": 1.0,
+      "scenario_acc": 0.9666666666666667,
+      "scenario_macro_f1": 0.9665402034006039
+    },
+    "lightgbm_supervised_3480_labels": {
+      "severity_acc": 0.64,
+      "severity_within_1": 0.9933333333333333,
+      "severe_recall": 0.7887323943661971,
+      "severe_precision": 0.9032258064516129,
+      "root_cause_acc": 1.0,
+      "scenario_acc": 1.0,
+      "scenario_macro_f1": 1.0
+    }
+  },
+  "example_narratives": [
+    {
+      "event_id": "E021256",
+      "true_scenario": "comfort_override",
+      "true_severity": 1,
+      "narrative": "Driver took over on a straight urban road under low-sun conditions with clear lane markings and no detected lead object. The gentle 1 mph speed drop and minimal brake pressure (0 bar) with low steering torque (3.7 Nm) indicate a voluntary takeover rather than a safety intervention."
+    },
+    {
+      "event_id": "E015405",
+      "true_scenario": "construction_zone",
+      "true_severity": 3,
+      "narrative": "Lane-detection confidence dropped from 0.82 to 0.49 due to orange traffic cones lining the left side of the road in a construction zone, causing the system to hand over to the driver. The driver took control with minimal deceleration (0.4 m/s\u00b2) and moderate steering inputs, indicating the system's degraded performance in the work zone rather than an imminent collision risk."
+    },
+    {
+      "event_id": "E017468",
+      "true_scenario": "faded_lanes",
+      "true_severity": 1,
+      "narrative": "Heavy snowfall obscured lane markings and reduced camera visibility to 0.62, causing lane-detection confidence to drop to 0.38, which triggered a system deactivation. The vehicle maintained constant speed with minimal braking and steering input, indicating the system handed over due to degraded perception rather than an immediate collision threat."
+    },
+    {
+      "event_id": "E015822",
+      "true_scenario": "phantom_brake",
+      "true_severity": 3,
+      "narrative": "The vehicle initiated hard braking (5.1 m/s\u00b2 deceleration, 27 mph speed drop) on a rainy highway under an overpass with no lead object detected. The perception system likely generated a false positive detection, possibly from reflection or sensor artifacts in the rain beneath the bridge structure, triggering an unnecessary safety intervention."
+    },
+    {
+      "event_id": "E014899",
+      "true_scenario": "sensor_blockage_snow",
+      "true_severity": 2,
+      "narrative": "Heavy snow at night reduced camera visibility to 0.12 and caused lane-detection confidence to drop to 0.33, exceeding the system's perceptual limits for 10 seconds. The system deactivated appropriately as environmental conditions prevented safe autonomous operation without driver intervention."
+    },
+    {
+      "event_id": "E021538",
+      "true_scenario": "sun_glare",
+      "true_severity": 2,
+      "narrative": "The system deactivated on a clear highway during low-sun conditions (golden hour). Camera visibility dropped to 0.44 for 0.2 seconds due to sun glare, causing a transient perception degradation that triggered the handover despite a lead vehicle being visible in the scene."
+    }
+  ]
+}
